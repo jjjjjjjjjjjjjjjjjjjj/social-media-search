@@ -19,7 +19,7 @@ const basePlugins = [
     { name: 'vendor', path: [__dirname + '/node_modules/'] },
   ]),
   new HtmlWebpackPlugin({
-    template: './src/index.html',
+    template: './app/index.html',
     inject: 'body',
     minify: false,
   }),

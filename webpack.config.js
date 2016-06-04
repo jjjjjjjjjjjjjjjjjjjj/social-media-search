@@ -75,7 +75,7 @@ const postcssPlugins = postcssBasePlugins
 
 module.exports = {
   entry: {
-    app: './src/main.ts'
+    app: './app/boot.ts'
   },
 
   output: {

@@ -28,3 +28,5 @@ typings/
 
 *.js.map
 src/**/*.js
+
+.idea

@@ -4,9 +4,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const proxy = require('./server/webpack-dev-proxy');
-const StyleLintPlugin = require('stylelint-webpack-plugin');
 const SplitByPathPlugin = require('webpack-split-by-path');
-
 const loaders = require('./webpack/loaders');
 
 const basePlugins = [
@@ -21,17 +19,12 @@ const basePlugins = [
   new HtmlWebpackPlugin({
     template: './app/index.html',
     inject: 'body',
-    minify: false,
-  }),
+    minify: false
+  })
 ];
 
 const devPlugins = [
-  new webpack.NoErrorsPlugin(),
-  new StyleLintPlugin({
-    configFile: './.stylelintrc',
-    files: ['src/**/*.css'],
-    failOnError: false,
-  }),
+  new webpack.NoErrorsPlugin()
 ];
 
 const prodPlugins = [
@@ -39,13 +32,13 @@ const prodPlugins = [
   new webpack.optimize.DedupePlugin(),
   new webpack.optimize.UglifyJsPlugin({
     mangle: {
-      keep_fnames: true,
+      keep_fnames: true
     },
     compress: {
-      warnings: false,
-    },
+      warnings: false
+    }
   }),
-  new webpack.NoErrorsPlugin(),
+  new webpack.NoErrorsPlugin()
 ];
 
 const plugins = basePlugins
@@ -54,19 +47,19 @@ const plugins = basePlugins
 
 const postcssBasePlugins = [
   require('postcss-import')({
-    addDependencyTo: webpack,
+    addDependencyTo: webpack
   }),
   require('postcss-cssnext')({
-    browsers: ['ie >= 8', 'last 2 versions'],
-  }),
+    browsers: ['ie >= 8', 'last 2 versions']
+  })
 ];
 const postcssDevPlugins = [];
 const postcssProdPlugins = [
   require('cssnano')({
     safe: true,
     sourcemap: true,
-    autoprefixer: false,
-  }),
+    autoprefixer: false
+  })
 ];
 
 const postcssPlugins = postcssBasePlugins
@@ -83,7 +76,7 @@ module.exports = {
     filename: '[name].[hash].js',
     publicPath: '/',
     sourceMapFilename: '[name].[hash].js.map',
-    chunkFilename: '[id].chunk.js',
+    chunkFilename: '[id].chunk.js'
   },
 
   devtool: process.env.NODE_ENV === 'production' ?
@@ -91,19 +84,19 @@ module.exports = {
     'inline-source-map',
 
   resolve: {
-    extensions: ['', '.webpack.js', '.web.js', '.ts', '.js'],
+    extensions: ['', '.webpack.js', '.web.js', '.ts', '.js']
   },
 
   plugins: plugins,
 
   devServer: {
     historyApiFallback: { index: '/' },
-    proxy: proxy(),
+    proxy: proxy()
   },
 
   module: {
     preLoaders: [
-      loaders.tslint,
+      loaders.tslint
     ],
     loaders: [
       loaders.ts,
@@ -114,11 +107,12 @@ module.exports = {
       loaders.woff,
       loaders.woff2,
       loaders.ttf,
+      loaders.sass
     ],
-    noParse: [/zone\.js\/dist\/.+/, /angular2\/bundles\/.+/],
+    noParse: [/zone\.js\/dist\/.+/, /angular2\/bundles\/.+/]
   },
 
   postcss: () => {
     return postcssPlugins;
-  },
+  }
 };

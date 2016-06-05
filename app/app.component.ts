@@ -1,8 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+
+import { BlockListComponent } from './block/block-list/block-list.component';
 
 @Component({
     selector: 'sms-app',
-    template: '<h1>Social media search</h1>'
+    templateUrl: '/app/app.component.html',
+    styleUrls: [ require('./styles.scss') ],
+    providers: [ Title ],
+    directives: [ BlockListComponent ]
 })
 
-export class AppComponent { }
+/**
+ * Main component class for social media search
+ */
+export class AppComponent implements OnInit {
+
+    // Title of our app.
+    title: string = 'Social media search';
+
+    constructor( private titleService: Title ) {}
+
+    ngOnInit() {
+        // Set the title of our page.
+        this.titleService.setTitle( this.title );
+    }
+
+}

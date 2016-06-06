@@ -1,5 +1,3 @@
-<ul class="blocks">
-    <li *ngFor="let block of blocks">
-        <span class="badge">{{block.id}}</span>
-    </li>
-</ul>
+<ol class="block-list">
+    <sms-block *ngFor="let block of blocks" [block]="block"></sms-block>
+</ol>

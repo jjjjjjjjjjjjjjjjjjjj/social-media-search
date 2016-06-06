@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import {
+    Component,
+    OnInit
+} from '@angular/core';
 
 import { BlockListComponent } from './block/block-list/block-list.component';
 
 @Component({
     selector: 'sms-app',
-    templateUrl: '/app/app.component.html',
-    styleUrls: [ require('./styles.scss') ],
+    template: require('to-string!./app.component.html'),
     providers: [ Title ],
     directives: [ BlockListComponent ]
 })

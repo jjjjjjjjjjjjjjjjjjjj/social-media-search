@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 
 import { 
     Block,
+    BlockComponent,
     BlockService
 } from '../shared';
 
 @Component({
     selector: 'sms-block-list',
-    templateUrl: '/app/block/block-list/block-list.component.html',
-    providers: [ BlockService ]
+    template: require('to-string!./block-list.component.html'),
+    providers: [ BlockService ],
+    directives: [ BlockComponent ]
 })
 
 export class BlockListComponent implements OnInit {

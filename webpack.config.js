@@ -107,7 +107,8 @@ module.exports = {
       loaders.woff,
       loaders.woff2,
       loaders.ttf,
-      loaders.sass
+      loaders.sass,
+      loaders.componentSass
     ],
     noParse: [/zone\.js\/dist\/.+/, /angular2\/bundles\/.+/]
   },

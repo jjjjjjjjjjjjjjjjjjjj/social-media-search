@@ -23,7 +23,7 @@
     "lint-js": "eslint '**/*.js' --ignore-path .gitignore",
     "lint-css": "stylelint './src/**/*.css'",
     "postinstall": "npm run typings && npm run build",
-    "start": "cross-env PORT=3000 NODE_ENV=production node server/node-server.js",
+    "start": "cross-env NODE_ENV=production node server/node-server.js",
     "pretest": "rimraf coverage/ & npm run lint",
     "test": "karma start",
     "posttest": "npm run cover",

@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import {
     BlockService,
     Block
-} from '.';
+} from './';
 
 @Component({
     selector: 'sms-block',

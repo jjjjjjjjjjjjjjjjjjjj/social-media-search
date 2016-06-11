@@ -1,23 +1,28 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
-// Barreled import
 import {
     Block,
     BLOCKS
 } from '../shared';
 
+import {
+    InstagramService,
+    TwitterService,
+    FacebookService,
+    GooglePlusService,
+    SearchCriteria
+} from '../../api';
+
 @Injectable()
 export class BlockService {
 
-    blocks: Block[];
+    public blocks: Block[];
 
-    getBlocks() {
-        return Promise.resolve(BLOCKS);
-    }
+    constructor(private instagramService: InstagramService) { }
 
-    getBlocksSlowly() {
-        return new Promise<Block[]>(
-            resolve => setTimeout( () => resolve(BLOCKS), 2000)
+    search(searchCriteria: SearchCriteria) {
+        return Promise.resolve(
+            this.instagramService.search(searchCriteria)
         );
     }
 

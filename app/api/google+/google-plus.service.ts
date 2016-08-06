@@ -1,10 +1,40 @@
+import { Injectable } from '@angular/core';
+import { Block } from '../../block';
+import {
+
+    SearchCriteria,
+    BlockProvider,
+    GOOGLE_PLUS_SETTINGS
+
+} from '../shared';
+
 /**
- * Google+ api service
+ * Instagram api service
  */
-export class GooglePlusService {
+@Injectable()
+export class GooglePlusService extends BlockProvider {
 
-    constructor() {}
+    public search( searchCriteria: SearchCriteria ) {
+        let block: Block = {
+            'id': '1',
+            'username': 'username',
+            'time': 100,
+            'link': 'http://www.example.com',
+            'sourceName': 'google+',
+            'title': 'testing',
+            'text': 'text',
+            'iconUrl': 'iconUrl',
+            'hidden' : false,
+            'media': 'test'
+        };
 
-    // todo: implementation
+        return [
+            block, block
+        ];
+    }
+
+    getBlocks( searchCriteria: SearchCriteria ) {
+        return Promise.resolve ( this.search( searchCriteria ) );
+    }
 
 }

@@ -1,3 +1,3 @@
-export * from './credentials.model';
+export * from './provider-settings';
 export * from './search-criteria.model';
-export * from './block-provider.interface';
+export * from './block-provider.model';

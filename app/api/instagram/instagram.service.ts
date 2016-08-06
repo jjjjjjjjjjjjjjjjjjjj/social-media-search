@@ -1,26 +1,39 @@
-import { SearchCriteria, BlockProvider, Credentials } from '../shared';
-import { InstagramCredentialsService } from './';
-import { Block, BLOCKS } from '../../block/shared';
+import { Injectable } from '@angular/core';
+import { Block } from '../../block';
+import {
+
+    SearchCriteria,
+    BlockProvider,
+    INSTAGRAM_SETTINGS
+
+} from '../shared';
 
 /**
  * Instagram api service
  */
-export class InstagramService implements BlockProvider {
+@Injectable()    
+export class InstagramService extends BlockProvider {
 
-    private credentials: Credentials;
-    private blocks: Block[];
+    public search( searchCriteria: SearchCriteria ) {
+        let block: Block = {
+            'id': '1',
+            'username': 'username',
+            'time': 1000,
+            'link': 'http://www.example.com',
+            'sourceName': 'Instagram',
+            'title': 'testing',
+            'text': 'text',
+            'iconUrl': 'iconUrl',
+            'hidden' : false,
+            'media': 'test'};
 
-    constructor() {
-        this.blocks = [
-            new Block('55', 'a', 'a', 'a', 'a', 'a', 'a', null),
-            new Block('422', 'a', 'a', 'a', 'a', 'a', 'a', null)
+        return [
+            block, block
         ];
     }
 
-    search(searchCriteria: SearchCriteria) {
-        return new Promise<Block[]>(resolve =>
-            setTimeout( () => resolve(this.blocks), 2000)
-        );
+    getBlocks( searchCriteria: SearchCriteria ) {
+        return Promise.resolve ( this.search( searchCriteria ) );
     }
-    
+
 }

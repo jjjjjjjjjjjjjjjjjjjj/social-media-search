@@ -1,29 +1,77 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import {
-    Block,
-    BLOCKS
-} from '../shared';
 
-import {
+    SearchCriteria,
     InstagramService,
-    TwitterService,
     FacebookService,
-    GooglePlusService,
-    SearchCriteria
+    TwitterService,
+    GooglePlusService
+
 } from '../../api';
 
+
+/**
+ * Main service responsible for delegating queries to external API
+ * services.
+ */
 @Injectable()
 export class BlockService {
 
-    public blocks: Block[];
+    /**
+     * The search criteria bound to the search form component and used
+     * to query the external APIs.
+     *
+     * @type    {SearchCriteria}
+     */
+    public searchCriteria: SearchCriteria = {
 
-    constructor(private instagramService: InstagramService) { }
+        'tag'      : '',
+        'location' : '',
+        'lat'      : '',
+        'long'     : ''
 
-    search(searchCriteria: SearchCriteria) {
-        return Promise.resolve(
-            this.instagramService.search(searchCriteria)
-        );
+    };
+
+    constructor(
+        private instagramService  : InstagramService,
+        private facebookService   : FacebookService,
+        private twitterService    : TwitterService,
+        private googlePlusService : GooglePlusService
+    ) { }
+
+    /**
+     * @param   tag
+     */
+    public updateSearchTag( tag : string ) {
+        this.searchCriteria.tag = tag;
+    };
+
+    /**
+     * @param   externalAPIKey
+     * @returns {Promise<Block[]>}
+     */
+    public getBlocks ( externalAPIKey : string ) {
+        
+        switch ( externalAPIKey ) {
+
+            case 'instagram':
+                return this.instagramService.getBlocks( this.searchCriteria );
+
+            case 'facebook':
+                return this.facebookService.getBlocks( this.searchCriteria );
+
+            case 'twitter':
+                return this.twitterService.getBlocks( this.searchCriteria );
+
+            case 'google+':
+                return this.googlePlusService.getBlocks( this.searchCriteria );
+
+            default:
+                return Promise.resolve( [] );
+
+        }
+
     }
 
 }

@@ -1,3 +1,12 @@
+<ul class="api-list">
+    <li *ngFor="let API of externalAPIS">
+        <label [attr.for]="API.key">{{ API.name }}</label>
+        <input type="checkbox" name="{{ API.key }}"
+               [(ngModel)]="API.active"
+               (ngModelChange)="getBlocks()">
+    </li>
+</ul>
+
 <ol class="block-list">
     <sms-block *ngFor="let block of blocks" [block]="block"></sms-block>
 </ol>

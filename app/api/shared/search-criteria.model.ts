@@ -1,6 +1,8 @@
-export class SearchCriteria {
-    tag: string;
-    location: string;
-    lat: string;
-    long: string;
+export interface SearchCriteria {
+
+    tag      : string;
+    location : string;
+    lat      : string;
+    long     : string;
+
 }

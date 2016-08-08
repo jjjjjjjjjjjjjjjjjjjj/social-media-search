@@ -3,7 +3,7 @@ import {
 
     SearchCriteria,
     BlockProvider,
-    FACEBOOK_SETTINGS
+    API_FACEBOOK
 
 } from '../shared';
 
@@ -15,7 +15,7 @@ import {
  * Facebook api service
  */
 @Injectable()
-export class FacebookService extends BlockProvider {
+export class FacebookService implements BlockProvider {
 
     search ( searchCriteria: SearchCriteria ) {
         let block : Block = {
@@ -23,7 +23,7 @@ export class FacebookService extends BlockProvider {
             'username': 'username',
             'time': 2000,
             'link': 'http://www.example.com',
-            'sourceName': 'facebook',
+            'API': API_FACEBOOK,
             'title': 'testing1',
             'text': 'text',
             'iconUrl': 'iconUrl',

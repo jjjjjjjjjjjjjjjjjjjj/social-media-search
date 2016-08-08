@@ -7,6 +7,10 @@ import {
 
 } from '../../media/';
 
+import {
+    API
+} from '../../api/';
+
 /**
  * A block that represents a search result.
  */
@@ -16,7 +20,7 @@ export class Block {
     username   : string;
     time       : number;
     link       : string;
-    sourceName : string;
+    API        : API;
     title      : string;
     text       : string;
     iconUrl    : string;

@@ -6,7 +6,8 @@ import {
     InstagramService,
     FacebookService,
     TwitterService,
-    GooglePlusService
+    GooglePlusService,
+    FiveHundredPixelsService
 
 } from '../../api';
 
@@ -26,7 +27,7 @@ export class BlockService {
      */
     public searchCriteria: SearchCriteria = {
 
-        'tag'      : '',
+        'tag'      : 'tokyo',
         'location' : '',
         'lat'      : '',
         'long'     : ''
@@ -34,10 +35,11 @@ export class BlockService {
     };
 
     constructor(
-        private instagramService  : InstagramService,
-        private facebookService   : FacebookService,
-        private twitterService    : TwitterService,
-        private googlePlusService : GooglePlusService
+        private instagramService         : InstagramService,
+        private facebookService          : FacebookService,
+        private twitterService           : TwitterService,
+        private googlePlusService        : GooglePlusService,
+        private fiveHundredPixelsService : FiveHundredPixelsService
     ) { }
 
     /**
@@ -66,6 +68,9 @@ export class BlockService {
 
             case 'google+':
                 return this.googlePlusService.getBlocks( this.searchCriteria );
+
+            case '500px':
+                return this.fiveHundredPixelsService.getBlocks( this.searchCriteria );
 
             default:
                 return Promise.resolve( [] );

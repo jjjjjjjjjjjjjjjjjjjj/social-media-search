@@ -6,7 +6,7 @@ import 'ts-helpers';
 
 import { enableProdMode }   from '@angular/core';
 import { bootstrap }        from '@angular/platform-browser-dynamic';
-import { HTTP_PROVIDERS }   from '@angular/http';
+import { JSONP_PROVIDERS}   from '@angular/http';
 
 import { AppComponent }     from './app.component';
 
@@ -21,6 +21,6 @@ if (__PRODUCTION__) {
 bootstrap(
     AppComponent,
     [
-        HTTP_PROVIDERS
+        JSONP_PROVIDERS
     ]
 );

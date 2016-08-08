@@ -1,24 +1,82 @@
 import { Injectable } from '@angular/core';
 
-// Barreled import
 import {
-    Block,
-    BLOCKS
-} from '../shared';
 
+    SearchCriteria,
+    InstagramService,
+    FacebookService,
+    TwitterService,
+    GooglePlusService,
+    FiveHundredPixelsService
+
+} from '../../api';
+
+
+/**
+ * Main service responsible for delegating queries to external API
+ * services.
+ */
 @Injectable()
 export class BlockService {
 
-    blocks: Block[];
+    /**
+     * The search criteria bound to the search form component and used
+     * to query the external APIs.
+     *
+     * @type    {SearchCriteria}
+     */
+    public searchCriteria: SearchCriteria = {
 
-    getBlocks() {
-        return Promise.resolve(BLOCKS);
-    }
+        'tag'      : 'tokyo',
+        'location' : '',
+        'lat'      : '',
+        'long'     : ''
 
-    getBlocksSlowly() {
-        return new Promise<Block[]>(
-            resolve => setTimeout( () => resolve(BLOCKS), 2000)
-        );
+    };
+
+    constructor(
+        private instagramService         : InstagramService,
+        private facebookService          : FacebookService,
+        private twitterService           : TwitterService,
+        private googlePlusService        : GooglePlusService,
+        private fiveHundredPixelsService : FiveHundredPixelsService
+    ) { }
+
+    /**
+     * @param   tag
+     */
+    public updateSearchTag( tag : string ) {
+        this.searchCriteria.tag = tag;
+    };
+
+    /**
+     * @param   externalAPIKey
+     * @returns {Promise<Block[]>}
+     */
+    public getBlocks ( externalAPIKey : string ) {
+        
+        switch ( externalAPIKey ) {
+
+            case 'instagram':
+                return this.instagramService.getBlocks( this.searchCriteria );
+
+            case 'facebook':
+                return this.facebookService.getBlocks( this.searchCriteria );
+
+            case 'twitter':
+                return this.twitterService.getBlocks( this.searchCriteria );
+
+            case 'google+':
+                return this.googlePlusService.getBlocks( this.searchCriteria );
+
+            case '500px':
+                return this.fiveHundredPixelsService.getBlocks( this.searchCriteria );
+
+            default:
+                return Promise.resolve( [] );
+
+        }
+
     }
 
 }

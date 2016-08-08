@@ -12,8 +12,8 @@ const nodeAppServer = require('./node-app-server');
  * Serves your app and allows you to proxy APIs if needed.
  */
 
-const app = express();
-const PORT = process.env.PORT || 9000;
+const app    = express();
+const PORT   = process.env.PORT || 8080;
 
 // Enable various security helpers.
 app.use(helmet());

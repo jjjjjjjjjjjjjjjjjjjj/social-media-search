@@ -31,4 +31,5 @@ src/**/*.js
 
 .idea
 
-**/provider-settings.tsapp/api/shared/apis.ts
+**/provider-settings.ts
+app/api/shared/apis.ts

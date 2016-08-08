@@ -31,14 +31,8 @@ exports.css = {
   exclude: /node_modules/,
 };
 
-exports.sass = {
-    test: /\.scss$/,
-    exclude: /node_modules/,
-    loader: 'raw-loader!sass-loader'
-};
-
 exports.sass = { test: /^(?!.*component).*\.scss$/, loaders: ['style', 'css', 'resolve-url', 'sass'] };
-exports.componentSass = { test: /\.component\.scss$/, loaders: ['raw', 'resolve-url', 'sass'] },
+exports.componentSass = { test: /\.component\.scss$/, loaders: ['raw', 'resolve-url', 'sass'] };
 
 exports.svg = makeUrlLoader(/\.svg$/);
 exports.eot = makeUrlLoader(/\.eot$/);

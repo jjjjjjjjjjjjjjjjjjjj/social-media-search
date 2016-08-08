@@ -4,13 +4,17 @@ import {
     OnInit
 } from '@angular/core';
 
-import { BlockListComponent } from './block/block-list/block-list.component';
+import { BlockListComponent }   from './block';
+import { SearchFormComponent }  from './shared';
 
 @Component({
     selector: 'sms-app',
     template: require('to-string!./app.component.html'),
     providers: [ Title ],
-    directives: [ BlockListComponent ]
+    directives: [
+        SearchFormComponent,
+        BlockListComponent
+    ]
 })
 
 /**
@@ -19,11 +23,15 @@ import { BlockListComponent } from './block/block-list/block-list.component';
 export class AppComponent implements OnInit {
 
     // Title of our app.
-    title: string = 'Social media search';
+    private title : string = 'Social media search';
 
     constructor( private titleService: Title ) {}
 
-    ngOnInit() {
+    public ngOnInit () {
+        this.setTitle();
+    }
+
+    public setTitle () {
         // Set the title of our page.
         this.titleService.setTitle( this.title );
     }

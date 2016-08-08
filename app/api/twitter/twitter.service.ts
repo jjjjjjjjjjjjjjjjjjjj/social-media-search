@@ -4,7 +4,7 @@ import {
 
     SearchCriteria,
     BlockProvider,
-    TWITTER_SETTINGS
+    API_TWITTER
 
 } from '../shared';
 
@@ -12,7 +12,7 @@ import {
  * Instagram api service
  */
 @Injectable()
-export class TwitterService extends BlockProvider {
+export class TwitterService implements BlockProvider {
 
     public search( searchCriteria: SearchCriteria ) {
         let block: Block = {
@@ -20,7 +20,7 @@ export class TwitterService extends BlockProvider {
             'username': 'username',
             'time': 500,
             'link': 'http://www.example.com',
-            'sourceName': 'twitter',
+            'API': API_TWITTER,
             'title': 'testing',
             'text': 'text',
             'iconUrl': 'iconUrl',

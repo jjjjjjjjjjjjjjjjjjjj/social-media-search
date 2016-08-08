@@ -8,8 +8,6 @@ import {
 
 } from '@angular/core';
 
-import { APIS } from './';
-
 import {
 
     Block,
@@ -23,11 +21,13 @@ import {
     TwitterService,
     FacebookService,
     InstagramService,
-    GooglePlusService
+    GooglePlusService,
+    FiveHundredPixelsService,
+    API,
+    APIS
 
 } from '../../api';
 
-import { API } from './apis';
 // endregion
 
 @Component({
@@ -38,7 +38,8 @@ import { API } from './apis';
         TwitterService,
         FacebookService,
         InstagramService,
-        GooglePlusService
+        GooglePlusService,
+        FiveHundredPixelsService
     ],
     directives: [ BlockComponent ]
 })
@@ -62,7 +63,7 @@ export class BlockListComponent implements OnInit {
      *
      * @type    {API[]}
      */
-    private externalAPIS : API[] = APIS;
+    private APIS : API[] = APIS;
 
     /**
      * Block fields to order the result list by. Must correspond to
@@ -98,7 +99,7 @@ export class BlockListComponent implements OnInit {
     }
 
     /**
-     * Iterates over all active external APIs, and queries them based on
+     * Iterates over all active APIs, and queries them based on
      * search criteria bound to input form on front end.
      */
     public getBlocks () : void {
@@ -107,7 +108,7 @@ export class BlockListComponent implements OnInit {
         this.clearBlockList();
 
         // Filter out inactive APIs.
-        let activeAPIS = _.filter( this.externalAPIS, { 'active' : true } );
+        let activeAPIS = _.filter( this.APIS, { 'active' : true } );
 
         for ( let API of activeAPIS ) {
 

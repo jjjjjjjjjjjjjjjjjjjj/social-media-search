@@ -1,5 +1,5 @@
 <ul class="api-list">
-    <li *ngFor="let API of externalAPIS">
+    <li *ngFor="let API of APIS">
         <label [attr.for]="API.key">{{ API.name }}</label>
         <input type="checkbox" name="{{ API.key }}"
                [(ngModel)]="API.active"

@@ -4,12 +4,8 @@ import {
 
 } from '../shared';
 
-export class BlockProvider {
+import { Block } from '../../block/shared/';
 
-    constructor ( protected settings : Object ) { }
-
-    public getBlocks ( searchCriteria: SearchCriteria ) {
-        return Promise.resolve( [] );
-    }
-
+export interface BlockProvider {
+    getBlocks ( searchCriteria: SearchCriteria ) : Promise<Block[]>;
 }

@@ -10,7 +10,8 @@ import {
     TwitterService,
     FacebookService,
     InstagramService,
-    GooglePlusService
+    GooglePlusService,
+    FiveHundredPixelsService
 } from '../../api';
 
 @Component({
@@ -21,7 +22,8 @@ import {
         TwitterService,
         FacebookService,
         InstagramService,
-        GooglePlusService
+        GooglePlusService,
+        FiveHundredPixelsService
     ]
 })
 

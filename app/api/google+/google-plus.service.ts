@@ -4,7 +4,7 @@ import {
 
     SearchCriteria,
     BlockProvider,
-    GOOGLE_PLUS_SETTINGS
+    API_GOOGLE_PLUS
 
 } from '../shared';
 
@@ -12,7 +12,7 @@ import {
  * Instagram api service
  */
 @Injectable()
-export class GooglePlusService extends BlockProvider {
+export class GooglePlusService implements BlockProvider {
 
     public search( searchCriteria: SearchCriteria ) {
         let block: Block = {
@@ -20,7 +20,7 @@ export class GooglePlusService extends BlockProvider {
             'username': 'username',
             'time': 100,
             'link': 'http://www.example.com',
-            'sourceName': 'google+',
+            'API': API_GOOGLE_PLUS,
             'title': 'testing',
             'text': 'text',
             'iconUrl': 'iconUrl',

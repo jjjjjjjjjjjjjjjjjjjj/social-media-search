@@ -5,11 +5,10 @@ import {
 } from '@angular/core';
 import 'rxjs/add/operator/debounceTime';
 
-import { BlockService } from '../../block';
+import { BlockStore } from '../../block';
 import {
     TwitterService,
     FacebookService,
-    InstagramService,
     GooglePlusService,
     FiveHundredPixelsService
 } from '../../api';
@@ -18,10 +17,9 @@ import {
     selector: 'sms-search-form',
     template: require('to-string!./search-form.component.html'),
     providers: [
-        BlockService,
+        BlockStore,
         TwitterService,
         FacebookService,
-        InstagramService,
         GooglePlusService,
         FiveHundredPixelsService
     ]
@@ -34,7 +32,7 @@ export class SearchFormComponent implements OnInit {
     
     private searchTagControl;
 
-    constructor( private blockService : BlockService ) {
+    constructor( private blockService : BlockStore ) {
         this.searchTagControl = new Control();
     }
 

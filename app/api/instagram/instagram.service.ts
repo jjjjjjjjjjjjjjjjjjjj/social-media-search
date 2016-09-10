@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
 
 import {
     Response,
-    Jsonp
+    Http
 } from '@angular/http';
 
 import {
@@ -24,53 +25,17 @@ import {
  */
 @Injectable()    
 export class InstagramService implements BlockProvider {
-    
-    private getEndpoint = API_INSTAGRAM.getEndpoint;
-    private accessToken = API_INSTAGRAM.accessToken;
 
-    constructor ( private jsonp : Jsonp ) {
-        
+    constructor ( private http : Http ) {
+
     }
 
-    public search( searchCriteria : SearchCriteria ) {
-
-        let tag = searchCriteria.tag;
-        let url = this.getEndpoint.replace('{TAG}', tag);
-        url = url.replace('{ACCESS_TOKEN}', this.accessToken);
-        url = url + '&callback=callbackFunction';
-
-        this.jsonp.get(url)
-            .toPromise()
-            .then(this.toBlock)
-            .catch(this.handleError);
-        
-        let block: Block = {
-            'id': '1',
-            'username': 'username',
-            'time': 1000,
-            'link': 'http://www.example.com',
-            'API': API_INSTAGRAM,
-            'title': 'testing',
-            'text': 'text',
-            'iconUrl': 'iconUrl',
-            'hidden' : false,
-            'media': 'test'};
-
-        return [
-            block, block
-        ];
+    public search( searchCriteria: SearchCriteria ) : Observable<Block[]> {
+        return this.http.get('').map(this.toBlocks);
     }
 
-    public toBlock(response : Response) {
-        console.log(response);
-    }
-
-    public handleError(response : Response) {
-        console.error(response);
-    }
-
-    getBlocks( searchCriteria: SearchCriteria ) : Promise<Block[]> {
-        return Promise.resolve ( this.search( searchCriteria ) );
+    public toBlocks(response) {
+        return [];
     }
 
 }

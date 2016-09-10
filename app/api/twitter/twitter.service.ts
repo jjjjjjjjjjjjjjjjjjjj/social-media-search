@@ -1,4 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+
+import {
+    Response,
+    Http
+} from '@angular/http';
+
 import { Block } from '../../block';
 import {
 
@@ -9,32 +17,21 @@ import {
 } from '../shared';
 
 /**
- * Instagram api service
+ * Twitter api service
  */
 @Injectable()
 export class TwitterService implements BlockProvider {
 
-    public search( searchCriteria: SearchCriteria ) {
-        let block: Block = {
-            'id': '1',
-            'username': 'username',
-            'time': 500,
-            'link': 'http://www.example.com',
-            'API': API_TWITTER,
-            'title': 'testing',
-            'text': 'text',
-            'iconUrl': 'iconUrl',
-            'hidden' : false,
-            'media': 'test'
-        };
+    constructor ( private http : Http ) {
 
-        return [
-            block, block
-        ];
     }
 
-    getBlocks( searchCriteria: SearchCriteria ) {
-        return Promise.resolve ( this.search( searchCriteria ) );
+    public search( searchCriteria: SearchCriteria ) : Observable<Block[]> {
+        return this.http.get('').map(this.toBlocks);
+    }
+
+    public toBlocks(response) {
+        return [];
     }
 
 }

@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+
+import {
+    Response,
+    Http
+} from '@angular/http';
 
 import {
 
     SearchCriteria,
-    InstagramService,
     FacebookService,
     TwitterService,
     GooglePlusService,
     FiveHundredPixelsService
 
 } from '../../api';
+import { Block } from './';
 
 
 /**
@@ -17,7 +23,7 @@ import {
  * services.
  */
 @Injectable()
-export class BlockService {
+export class BlockStore {
 
     /**
      * The search criteria bound to the search form component and used
@@ -33,9 +39,9 @@ export class BlockService {
         'long'     : ''
 
     };
-
+    
     constructor(
-        private instagramService         : InstagramService,
+        private http                     : Http,
         private facebookService          : FacebookService,
         private twitterService           : TwitterService,
         private googlePlusService        : GooglePlusService,
@@ -50,30 +56,34 @@ export class BlockService {
     };
 
     /**
-     * @param   externalAPIKey
-     * @returns {Promise<Block[]>}
+     * @param externalAPIKey
+     * @returns {any}
      */
-    public getBlocks ( externalAPIKey : string ) {
+    public getBlocks ( externalAPIKey : string ) : Observable<Block[]> {
         
         switch ( externalAPIKey ) {
 
-            case 'instagram':
-                return this.instagramService.getBlocks( this.searchCriteria );
-
             case 'facebook':
-                return this.facebookService.getBlocks( this.searchCriteria );
+                return this.facebookService.search( this.searchCriteria );
 
             case 'twitter':
-                return this.twitterService.getBlocks( this.searchCriteria );
+                return this.twitterService.search( this.searchCriteria );
 
             case 'google+':
-                return this.googlePlusService.getBlocks( this.searchCriteria );
+                return this.googlePlusService.search( this.searchCriteria );
 
             case '500px':
-                return this.fiveHundredPixelsService.getBlocks( this.searchCriteria );
+                let obs = this.fiveHundredPixelsService.search( this.searchCriteria );
+
+                obs.subscribe(
+                    res => {
+                        console.log(res);
+                    });
+
+                return obs;
 
             default:
-                return Promise.resolve( [] );
+                return this.http.get('').map(() => {return []});
 
         }
 

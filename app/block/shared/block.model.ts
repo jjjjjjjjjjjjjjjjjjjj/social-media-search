@@ -16,7 +16,7 @@ import {
  */
 export class Block {
 
-    id         : string;
+    id         : string|number;
     username   : string;
     time       : number;
     link       : string;

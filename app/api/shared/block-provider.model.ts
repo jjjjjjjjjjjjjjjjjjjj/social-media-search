@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+
 import {
 
     SearchCriteria
@@ -7,5 +9,5 @@ import {
 import { Block } from '../../block/shared/';
 
 export interface BlockProvider {
-    getBlocks ( searchCriteria: SearchCriteria ) : Promise<Block[]>;
+    search( searchCriteria : SearchCriteria ) : Observable<Block[]>;
 }

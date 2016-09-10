@@ -1,4 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+
+import {
+    Response,
+    Http
+} from '@angular/http';
+
 import {
 
     SearchCriteria,
@@ -17,27 +25,16 @@ import {
 @Injectable()
 export class FacebookService implements BlockProvider {
 
-    search ( searchCriteria: SearchCriteria ) {
-        let block : Block = {
-            'id': '1',
-            'username': 'username',
-            'time': 2000,
-            'link': 'http://www.example.com',
-            'API': API_FACEBOOK,
-            'title': 'testing1',
-            'text': 'text',
-            'iconUrl': 'iconUrl',
-            'hidden' : false,
-            'media': 'test'
-        };
+    constructor ( private http : Http ) {
 
-        return [
-            block, block
-        ];
     }
 
-    getBlocks ( searchCriteria: SearchCriteria ) {
-        return Promise.resolve( this.search( searchCriteria ) );
+    public search( searchCriteria: SearchCriteria ) : Observable<Block[]> {
+        return this.http.get('').map(this.toBlocks);
+    }
+
+    public toBlocks(response) {
+        return [];
     }
 
 }

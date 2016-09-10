@@ -12,7 +12,7 @@ import {
 
     Block,
     BlockComponent,
-    BlockService
+    BlockStore
 
 } from '../shared';
 
@@ -20,7 +20,6 @@ import {
 
     TwitterService,
     FacebookService,
-    InstagramService,
     GooglePlusService,
     FiveHundredPixelsService,
     API,
@@ -34,10 +33,9 @@ import {
     selector: 'sms-block-list',
     template: require('to-string!./block-list.component.html'),
     providers: [
-        BlockService,
+        BlockStore,
         TwitterService,
         FacebookService,
-        InstagramService,
         GooglePlusService,
         FiveHundredPixelsService
     ],
@@ -86,7 +84,7 @@ export class BlockListComponent implements OnInit {
         'desc'  // Sort order for secondary field
     ];
 
-    constructor ( private blockService : BlockService ) { }
+    constructor ( private blockStore : BlockStore ) { }
 
     /**
      * Initialization logic for block list component.
@@ -112,16 +110,19 @@ export class BlockListComponent implements OnInit {
 
         for ( let API of activeAPIS ) {
 
-            // Call blockService to get search results from all active APIs.
-            this.blockService
+            // Call blockStore to get search results from all active APIs.
+            this.blockStore
                 .getBlocks( API.key )
-                .then(
-                    (blocks) => {
-                        this.addBlocks( blocks );
+                .subscribe(
+                    response => {
+                        this.addBlocks(response);
                         this.orderList();
+                    },
+                    err => {
+                        // Log errors if any
+                        console.error(err);
                     }
                 );
-
         }
 
     }
